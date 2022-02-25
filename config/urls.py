@@ -1,4 +1,4 @@
-"""today_nsft URL Configuration
+"""config URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from ninja import NinjaAPI
+
+from nstapp.apis.v1.nst_router import router as nst_router
+
+api = NinjaAPI()
+api.add_router("/nsts/", nst_router)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("api/v1/", api.urls),
 ]
 
